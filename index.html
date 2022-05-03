@@ -1,21 +1,133 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!--Header -->
+		<TITLE>Omer mordechai and Lidor tzur Pac Man Game</TITLE><meta charset="UTF-8">
+		<!-- JS -->
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-	</head>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+		<!-- Css -->
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link href='https://css.gg/pacman.css' rel='stylesheet'>
+		<script src="https://kit.fontawesome.com/ebd651dd1f.js" crossorigin="anonymous"></script>
+		</head>
 
-	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+	<body style="overflow:visible;" >
+	<!-- The Top Menu -->
+	<div class="w3-top">
+	<div class="w3-bar w3-black w3-card">
+	  <a href="#" class="w3-bar-item w3-button w3-padding-large" id="Home_Menu">HOME<i class="gg-pacman" style="margin-top: -15px;margin-left: -10px;"></i></a>
+	  <a href="#Sign_Up" class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Sign_Up_Menu">Sign Up</a>
+	  <a href="#Log_In" class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Log_In_Menu">Log In</a>
+	  <a href="#About" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+	  <a href="#About"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="float: right;"> <span id="User_Status"></span><i id="User_Icon" class="fas fa-user-astronaut" style='font-size:26px'></i><i id="Guest_Icon" class="fas fa-user-secret" style='font-size:26px'></i></a>
+	  </div>
+	</div>
+		<!-- WINDOS THAT CHANGED: -->
+		<!-- 0.Home: -->
+		
+		<section Class="window" id="Home_Window" style="margin-top: -160px;"  >
+		
+		<div class="image-layer" style="background-image:url(Images/B_1.jpg)">
+				<h1>Game On Pac Man!</h1>
+				<button  style=" font-size:24px; margin-top: 160px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  type="button"><i class="fa fa-user" style="font-size:24px"></i>  Sign Up</button>
+				<br/>
+				<button  style=" font-size:24px; margin-top: 20px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  ><i class="fa fa-sign-in" style="font-size:24px"></i> Log In&nbsp</button>
+
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
-		</div>
-		<div id="game">
+
+		</section>
+		<!--1.Sign Up-->
+		<section Class="window" id="Sign_Up_Window">
+			<form class='Form_Tamplate' name="Sign_Up" style=" margin-bottom: 30px;" >
+				<h1 style="margin-top: -50px; margin-bottom: 30px;">Sign Up</h1>
+				<div class='Warp_Form_Box'>
+				  <input type='text' name='Full_Name' id="Full_Name" placeholder='Enter Your Full Name'  style="height:  30px;" >
+				</div>
+				<div class='Warp_Form_Box'>
+					<input type='text' id="Sign_Up_UserName" name='User_Name' placeholder='Enter Your User Name' style="height:  30px;" >
+				</div>
+				<div class='Warp_Form_Box'>
+					<input type='password' id="Sign_Up_Password" name='Password' placeholder='Password' style="height:  30px;">
+				  </div>
+				  <div class='Warp_Form_Box'>
+					<input type='text' name='Email' placeholder='Enter Your Email' style="height:  30px;">
+				</div>
+				<div class='Warp_Form_Box'>
+					<input type='date' id="birthday" name="birthday"  placeholder="yyyy-mm-dd" min="1940-01-01" max="2020-12-31"  style="height:  30px;">
+				</div>
+				<div class='Warp_Form_Box' style="margin-right: 140px;">
+				<button class='Warp_Btn_Box' type='submit' name="Register">
+					<div class='text'> Register</div>
+					<button class='Warp_Btn_Box' type='reset' name="Reset" style="margin-left: 140px; margin-top:-56px" >
+						<div class='text' > Reset</div>
+					</button>
+				</button></div>
+			</form>
+		</section>
+		<!--2.Log IN-->
+		<section Class="window" id="Log_In_Window"  >
+			<form autocomplete='off' name="Log_In" class='Form_Tamplate'style=" margin-bottom: 60px;">
+				<h1>Log In</h1>
+				<canvas style="border:1px solid #f3eaea; height: 30px;width: 270px; "></canvas>
+				<div class='Warp_Form_Box'>
+				  <input name='User_Name' placeholder='User Name' type='text'>
+				</div>
+				<div class='Warp_Form_Box'>
+					<input name='Password' placeholder='Password' type='password'>
+				  </div>
+				<div class='Warp_Form_Box' style="margin-right: 140px;">
+				<button class='Warp_Btn_Box' type='submit' name="Log_In">
+					<div class='text'> Log In</div>
+					<button class='Warp_Btn_Box' type='button' name="sdsd" style="margin-left: 140px; margin-top:-55px" >
+						
+						<div class='text'>New User</div>
+					</button>
+				</button></div>
+			</form>	  
+		</section>
+		<!--3.Game_Settings-->
+		<section Class="window" id="Game_Settings_Window" >
+		<h1>Game Setting</h1>
+		</section>
+		<!--4.Game-->
+		<section Class="window" id="Game_Window" >
+			<div id="game" >
+			<div id="score">
+					<label for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
 			<canvas id="canvas" height="600" width="600"></canvas>
-		</div>
+			</div>
+			</section>
+		<!--5. Error-->
+		<section Class="window" id="Error_Window">
+		<h4 style="margin-bottom: 60px;">You do not have permission For this action!You first Must to Log Out from Your account!</h4>
+		<img src="Images\Error.jpg" style="height:300px;">
+		<div class='Form_Tamplate'>
+		<div class='Warp_Form_Box' style="margin-top: -44px;" >
+			<button class='Warp_Btn_Box' type='submit' name="Register" onclick="Guest_Enter_Website()">
+				<div class='text'><i class="fa fa-sign-out" style="font-size:24px"></i> Log Out</div>
+				</button>
+			</button></div></div>
+		</section>
+<!-- Footer -->
+<div style=" position: relative; height: 700px;" >
+<footer class=" w3-padding-3  w3-black w3-center w3-bottom" >
+	<span>Find Us On Facebook:</span>
+	<a href="#" style="text-decoration:none">Omer Mordechai&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
+	<span>&nbsp; </span>
+	<a href="#" style="text-decoration:none"> &nbsp;Lidor Zur&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
+  </footer>
+</div>
 	</body>
 </html>

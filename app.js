@@ -1,3 +1,9 @@
+/*User var Initiallaizing*/
+var All_Users={};
+All_Users["k"]="k";
+var Log_In_User;
+
+/*Game vars*/
 var context;
 var shape = new Object();
 var board;
@@ -8,10 +14,226 @@ var time_elapsed;
 var interval;
 
 $(document).ready(function() {
+	$("body").css({"overflow":"visible"});
 	context = canvas.getContext("2d");
 	Start();
+	/*Generate the windos Methods:*/
+	Guest_Enter_Website();
+
+	/*Sign_Up+Log_In Validation methods: */
+	jQuery.validator.addMethod("ValidPassword", function (value) { 
+        return /[a-z].*[0-9]|[0-9].*[a-z]/i.test(value); 
+	}, );
+	jQuery.validator.addMethod("UserNameNotInUse", function (value) { 
+		return ((All_Users.hasOwnProperty(value))==false);
+	}, );
+	jQuery.validator.addMethod("HasUserNameLikeInput", function (value) { 
+		return ((All_Users.hasOwnProperty(value))==ture);
+	}, );
+	Generate_Valitation_Sign_Up();
+	Generate_Valitation_Log_In();
 });
 
+/* The function Set and menegment the initialize of the Setting of the User*/
+function Guest_Enter_Website(){
+	Log_In_User="";
+	//Step 1 Initalizing the User Status that its in the top right side of the screen:
+	$("#User_Icon").hide();
+	$("#User_Status").text("Hello Guest! ");
+	//At First we Hide all the Windows-Except the Home Window:
+		//Always hide to Guest:
+		$("#Game_Window").hide();
+		$("#Game_Settings_Window").hide();
+		$("#Error_Window").hide();
+		//Hide:
+		$("#Sign_Up_Window").hide();
+		$("#Log_In_Window").hide();
+		//Show:
+		$("#Home_Window").show();
+
+	$("#Home_Menu").click(function() {
+		//Hide:
+		$("#Sign_Up_Window").hide();
+		$("#Log_In_Window").hide();
+		//Show:
+		$("#Home_Window").show();
+	});
+
+	$("#Sign_Up_Menu").click(function() {
+		//Hide:
+		$("#Home_Window").hide();
+		$("#Log_In_Window").hide();
+		//Show:
+		$("#Sign_Up_Window").show();
+
+	});
+	$("#Log_In_Menu").click(function() {
+		//Hide:
+		$("#Sign_Up_Window").hide();
+		$("#Home_Window").hide();
+		//Show:
+		$("#Log_In_Window").show();
+		
+
+	});
+}
+function User_Log_In_Website(){
+	//Step 1 Initalizing the User Status that its in the top right side of the screen:
+	$("#Guest_Icon").hide();
+	$("#User_Icon").show();
+	$("#User_Status").text("Hello "+Log_In_User+"! ");
+	//At First we Hide all the Windows-Except the Home Window:
+		//Always hide to User:
+		$("#Sign_Up_Window").hide();
+		$("#Log_In_Window").hide();
+		$("#Home_Window").hide();
+		$("#Game_Window").hide();
+		$("#Error_Window").hide();
+		//Show:
+		$("#Game_Settings_Window").show();
+
+		$("#Sign_Up_Menu").click(function() {
+			//Hide:
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Window").hide();
+			$("#Game_Settings_Window").hide();
+			//Show:
+			$("#Error_Window").show();
+	
+		});
+		$("#Log_In_Menu").click(function() {
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Window").hide();
+			$("#Game_Settings_Window").hide();
+			//Show:
+			$("#Error_Window").show();
+			
+	
+		});
+
+}
+
+function Generate_Valitation_Sign_Up(){
+	$("form[name='Sign_Up']").validate({
+		// Specify validation rules
+		rules: {
+			Full_Name:{
+			required: true,
+			lettersonly: true
+			},
+			User_Name:{
+				required: true,
+				alphanumeric:true,
+				UserNameNotInUse:true
+			},
+			Password: {
+			  required: true,
+			  minlength: 6,
+			  ValidPassword:true
+			},
+			Email: {
+				required: true,
+				email: true
+			  },
+			  birthday:{
+				required: true
+				}
+			  },
+			  messages: {
+				  Full_Name: {
+					  required: "Please fill out this field.",
+					  lettersonly: "Please enter only letters."
+				  },
+				  User_Name: {
+					  required: "Please fill out this field.",
+					  alphanumeric:"Please fill out only english and numbers.",
+					  UserNameNotInUse:"This Username alredy in use!"
+				  },
+				  Password: {
+					  required: "Please fill out this field.",
+					  minlength:"The Length must be at least 6 Chars!",
+					  ValidPassword:"Your input must contain at least 1 letter and 1 number"
+				  },
+				  Email: {
+					  required: "Please fill out this field.",
+					  email: "Please enter a valid address"
+				  },
+				  birthday: {
+					  required: "Please fill out this field."
+				  }
+			  },
+			  // Make sure the form is submitted to the destination defined
+	  // in the "action" attribute of the form when valid
+	  submitHandler: function(form) {
+		let New_User_Name = $("#Sign_Up_UserName").val();
+		let New_User_Password = $("#Sign_Up_Password").val();
+		All_Users[New_User_Name]=New_User_Password;
+		Log_In_User=New_User_Name;
+		window.alert("Your register is sucsessfuley");
+		User_Log_In_Website();	
+
+	  }
+	});
+}
+
+function Generate_Valitation_Log_In(){
+	$("form[name='Log_In']").validate({
+		// Specify validation rules
+		rules: {
+
+			User_Name:{
+				required: true,
+				alphanumeric:true,
+				HasUserNameLikeInput:true
+				
+			},
+			Password: {
+			  required: true,
+			  alphanumeric:true
+
+			}
+			  },
+			  messages: {
+
+				  User_Name: {
+					  required: "Please fill out this field.",
+					  alphanumeric:"Please fill out only english and numbers.",
+					  HasUserNameLikeInput:"k"
+				  },
+				  Password: {
+					  required: "Please fill out this field.",
+					  alphanumeric:"Please fill out only english and numbers."
+				  }
+
+			  },
+			  // Make sure the form is submitted to the destination defined
+	  // in the "action" attribute of the form when valid
+	  submitHandler: function(form) {
+		form.submit();
+	  }
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//The Game Function:
 function Start() {
 	board = new Array();
 	score = 0;

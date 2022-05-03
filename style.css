@@ -1,0 +1,91 @@
+@import  url(https://fonts.googleapis.com/css?family=Megrim);
+
+html, body {margin: 0; height: 100%; overflow: hidden}
+.window {
+  margin-top: 47px;
+  text-align:center;
+  background-color: #212121;
+  color: #fff;
+  font-family: monospace, serif;
+  letter-spacing: 0.05em;
+  overflow-x:auto;
+}
+
+
+.Form_Tamplate {
+  width: 300px;
+  padding: 64px 15px 24px;
+  margin: 0 auto;
+}
+
+.Form_Tamplate .Warp_Form_Box {
+  margin: 0 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.Form_Tamplate .Warp_Form_Box input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid gray;
+  background: transparent;
+  color: #fff;
+  font-family: monospace, serif;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+  position: relative;
+  
+}
+
+.Form_Tamplate .Warp_Btn_Box {
+  width: 100%;
+  display: block;
+  padding: 14px 16px;
+  background: transparent;
+  border: 2px solid #212121;
+  outline: none;
+  color: #fff;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 16px;
+  background: linear-gradient(90deg, #020024 0%, #340979 37%, #00d4ff 94%);
+}
+.Form_Tamplate .Warp_Btn_Box:hover
+{
+  background:0;
+  background: linear-gradient(90deg, #020024 20%, #00d4ff 80%, #020024 20%);
+}
+.Form_Tamplate label{
+  font-size: 13px;
+  color: red;
+  float:left;
+  /*margin-right: -60px;*/
+  margin-right: -60px;
+  border: 1px solid rgb(159, 58, 58);
+}
+
+/* new*/
+.image-layer{
+	position:fixed;
+	left:0;
+	top:0;
+  margin-bottom: 100px;
+  height: 100%;
+  width: 100%;
+	background-repeat: repeat-x;
+	background-position: center;
+	background-size: cover;
+  /*filter: brightness(0.67);*/
+}
+h1 {
+  margin-top: 50px;
+  margin-right: -140px;
+	padding: 0;
+  font-family: 'Megrim', cursive;
+  font-size: 66px;
+	color: yellow;
+	text-align: center;
+  font-weight: bold;
+  
+  }
