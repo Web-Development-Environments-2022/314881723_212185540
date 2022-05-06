@@ -6,9 +6,12 @@
 		<!-- JS -->
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
 		<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+		<!--Method for the dialog-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 		<!-- Css -->
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -16,31 +19,40 @@
 		<link href='https://css.gg/pacman.css' rel='stylesheet'>
 		<script src="https://kit.fontawesome.com/ebd651dd1f.js" crossorigin="anonymous"></script>
 		</head>
-
-	<body style="overflow:visible;" >
+	<body  >
+		<div id="dialog" title="Basic dialog" style="height: 400px; width: 480px;" >
+			<p>This is sdsd default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+		  </div>
+		  <div id="Sucssesful_Register" title="Basic dialog" style="height: 400px; width: 480px; " >
+			<p>Your succsesfuly Register</p>
+		  </div>
+		  <div id="Sucssesful_Log_In" title="Basic dialog" style="height: 400px; width: 480px; " >
+			<p>Your succsesfuly Log_In</p>
+		  </div>
+		  <div id="Incorrect_Password" title="Basic dialog" style="height: 400px; width: 480px; " >
+			<p>Your Password is incorrect,plese try again!</p>
+		  </div>
 	<!-- The Top Menu -->
 	<div class="w3-top">
 	<div class="w3-bar w3-black w3-card">
-	  <a href="#" class="w3-bar-item w3-button w3-padding-large" id="Home_Menu">HOME<i class="gg-pacman" style="margin-top: -15px;margin-left: -10px;"></i></a>
-	  <a href="#Sign_Up" class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Sign_Up_Menu">Sign Up</a>
-	  <a href="#Log_In" class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Log_In_Menu">Log In</a>
-	  <a href="#About" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
-	  <a href="#About"  class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="float: right;"> <span id="User_Status"></span><i id="User_Icon" class="fas fa-user-astronaut" style='font-size:26px'></i><i id="Guest_Icon" class="fas fa-user-secret" style='font-size:26px'></i></a>
+	  <a  class="w3-bar-item w3-button w3-padding-large" id="Home_Menu">HOME<i class="gg-pacman" style="margin-top: -15px;margin-left: -10px;"></i></a>
+	  <a  class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Sign_Up_Menu">Sign Up</a>
+	  <a  class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="Log_In_Menu">Log In</a>
+	  <a  class="w3-bar-item w3-button w3-padding-large w3-hide-small" id="About_Menu">About</a>
+	  <a   class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="float: right;"> <span id="User_Status"></span><i id="User_Icon" class="fas fa-user-astronaut" style='font-size:26px'></i><i id="Guest_Icon" class="fas fa-user-secret" style='font-size:26px'></i></a>
 	  </div>
 	</div>
 		<!-- WINDOS THAT CHANGED: -->
 		<!-- 0.Home: -->
 		
 		<section Class="window" id="Home_Window" style="margin-top: -160px;"  >
-		
+			
 		<div class="image-layer" style="background-image:url(Images/B_1.jpg)">
-				<h1>Game On Pac Man!</h1>
-				<button  style=" font-size:24px; margin-top: 160px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  type="button"><i class="fa fa-user" style="font-size:24px"></i>  Sign Up</button>
+				<h1 id="Home_window_header">Game On Pac Man!</h1>
+				<button id="Home_Button_SignUp"   style=" font-size:24px; margin-top: 160px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white " ><i class="fa fa-user" style="font-size:24px"></i>  Sign Up</button>
 				<br/>
-				<button  style=" font-size:24px; margin-top: 20px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  ><i class="fa fa-sign-in" style="font-size:24px"></i> Log In&nbsp</button>
-
+				<button onclick="Log_In_Button_Clicked()" style=" font-size:24px; margin-top: 20px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  ><i class="fa fa-sign-in" style="font-size:24px"></i> Log In&nbsp</button>
 		</div>
-
 		</section>
 		<!--1.Sign Up-->
 		<section Class="window" id="Sign_Up_Window">
@@ -76,16 +88,15 @@
 				<h1>Log In</h1>
 				<canvas style="border:1px solid #f3eaea; height: 30px;width: 270px; "></canvas>
 				<div class='Warp_Form_Box'>
-				  <input name='User_Name' placeholder='User Name' type='text'>
+				  <input name='User_Name' id="L_I_User_Name" placeholder='User Name' type='text'>
 				</div>
 				<div class='Warp_Form_Box'>
-					<input name='Password' placeholder='Password' type='password'>
+					<input name='Password' id="L_I_Password" placeholder='Password' type='password'>
 				  </div>
 				<div class='Warp_Form_Box' style="margin-right: 140px;">
 				<button class='Warp_Btn_Box' type='submit' name="Log_In">
 					<div class='text'> Log In</div>
 					<button class='Warp_Btn_Box' type='button' name="sdsd" style="margin-left: 140px; margin-top:-55px" >
-						
 						<div class='text'>New User</div>
 					</button>
 				</button></div>
@@ -129,5 +140,6 @@
 	<a href="#" style="text-decoration:none"> &nbsp;Lidor Zur&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
   </footer>
 </div>
+
 	</body>
 </html>

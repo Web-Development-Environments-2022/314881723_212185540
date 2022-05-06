@@ -14,9 +14,21 @@ var time_elapsed;
 var interval;
 
 $(document).ready(function() {
-	$("body").css({"overflow":"visible"});
+	/*General Game Initalizing*/
 	context = canvas.getContext("2d");
 	Start();
+	/*Generate the Dialogs Blocks-(Hide all the dialog HTML tags+Initilaze the About dialog box*/
+	$("#dialog").hide();
+	$("#Sucssesful_Register").hide();
+	$("#Sucssesful_Log_In").hide();
+	$("#Incorrect_Password").hide();
+	$("#About_Menu").click(function() {
+	$("#dialog").modal({
+		fadeDuration: 1000,
+		fadeDelay: 0.50
+	  })
+	});
+	
 	/*Generate the windos Methods:*/
 	Guest_Enter_Website();
 
@@ -28,8 +40,9 @@ $(document).ready(function() {
 		return ((All_Users.hasOwnProperty(value))==false);
 	}, );
 	jQuery.validator.addMethod("HasUserNameLikeInput", function (value) { 
-		return ((All_Users.hasOwnProperty(value))==ture);
+		return (All_Users.hasOwnProperty(value));
 	}, );
+	/*Generate the Forms :*/
 	Generate_Valitation_Sign_Up();
 	Generate_Valitation_Log_In();
 });
@@ -39,6 +52,7 @@ function Guest_Enter_Website(){
 	Log_In_User="";
 	//Step 1 Initalizing the User Status that its in the top right side of the screen:
 	$("#User_Icon").hide();
+	$("#Guest_Icon").show();
 	$("#User_Status").text("Hello Guest! ");
 	//At First we Hide all the Windows-Except the Home Window:
 		//Always hide to Guest:
@@ -57,7 +71,8 @@ function Guest_Enter_Website(){
 		$("#Log_In_Window").hide();
 		//Show:
 		$("#Home_Window").show();
-	});
+		var txt1 = "<p>Text.</p>"; 
+		});
 
 	$("#Sign_Up_Menu").click(function() {
 		//Hide:
@@ -111,11 +126,32 @@ function User_Log_In_Website(){
 			$("#Game_Settings_Window").hide();
 			//Show:
 			$("#Error_Window").show();
-			
-	
 		});
 
+		$("#Home_Menu").click(function() {
+			//Hide:
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Window").hide();
+			$("#Error_Window").hide();
+			//Show:
+			$("#Game_Settings_Window").show();
+		});
+		$("#Home_Button_SignUp").click(function() {
+			window.alert("DDDDD");
+	});
+
 }
+function myFunction(){
+	window.alert("DDDDD");
+		
+}
+
+function Log_In_Button_Clicked(){
+	
+}
+
 
 function Generate_Valitation_Sign_Up(){
 	$("form[name='Sign_Up']").validate({
@@ -173,7 +209,10 @@ function Generate_Valitation_Sign_Up(){
 		let New_User_Password = $("#Sign_Up_Password").val();
 		All_Users[New_User_Name]=New_User_Password;
 		Log_In_User=New_User_Name;
-		window.alert("Your register is sucsessfuley");
+		$("#Sucssesful_Register").modal({
+			fadeDuration: 1000,
+			fadeDelay: 0.50
+		  })
 		User_Log_In_Website();	
 
 	  }
@@ -202,7 +241,7 @@ function Generate_Valitation_Log_In(){
 				  User_Name: {
 					  required: "Please fill out this field.",
 					  alphanumeric:"Please fill out only english and numbers.",
-					  HasUserNameLikeInput:"k"
+					  HasUserNameLikeInput:"There is no User name like that in the system!"
 				  },
 				  Password: {
 					  required: "Please fill out this field.",
@@ -213,7 +252,23 @@ function Generate_Valitation_Log_In(){
 			  // Make sure the form is submitted to the destination defined
 	  // in the "action" attribute of the form when valid
 	  submitHandler: function(form) {
-		form.submit();
+		let Log_In_User_Name = $("#L_I_User_Name").val();
+		let Log_In_Password = $("#L_I_Password").val();
+		let Real_password=All_Users[Log_In_User_Name];
+		if(Real_password==Log_In_Password){
+			Log_In_User=Log_In_User_Name;
+			$("#Sucssesful_Log_In").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  })
+			User_Log_In_Website();	
+		}
+		else{
+			$("#Incorrect_Password").modal({
+				fadeDuration: 10,
+			  })
+		}
+		
 	  }
 	});
 }
