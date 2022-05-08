@@ -3,6 +3,19 @@ var All_Users={};
 All_Users["k"]="k";
 var Log_In_User;
 
+/*game settings vars*/
+var keys = {};
+var keysaveUp;
+var keysaveDown;
+var keysaveRight;
+var keysaveLeft;
+var numberofballs;
+var highvalballcolor;
+var midvalballcolor;
+var smallvalballcolor;
+var gametime;
+var numofmonsters;
+
 /*Game vars*/
 var context;
 var shape = new Object();
@@ -12,6 +25,7 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+
 
 $(document).ready(function() {
 	/*General Game Initalizing*/
@@ -42,11 +56,84 @@ $(document).ready(function() {
 	jQuery.validator.addMethod("HasUserNameLikeInput", function (value) { 
 		return (All_Users.hasOwnProperty(value));
 	}, );
+	jQuery.validator.addMethod("ValidColor", function (value) { 
+        return /^#(?:[0-9a-fA-F]{3}){1,2}$/i.test(value); 
+	}, );
 	/*Generate the Forms :*/
 	Generate_Valitation_Sign_Up();
 	Generate_Valitation_Log_In();
+	Generate_Validation_Game_Settings()
+	checkKeyDown();
+	checkKeyDown1();
+	checkKeyDown2();
+	checkKeyDown3();
+	randon();
 });
 
+function checkKeyDown(){
+	$( "#inputBox1" ).on( "keydown", function(event) {
+		if($("#inputBox2").val() != event.key && $("#inputBox3").val() != event.key && $("#inputBox4").val() != event.key){
+			$( "#inputBox1" ).val(event.key);
+			keysaveRight = event.which;
+		}
+	  })
+}
+
+function checkKeyDown1(){
+	$( "#inputBox2" ).on( "keydown", function(event) {
+		if($("#inputBox1").val() != event.key && $("#inputBox3").val() != event.key && $("#inputBox4").val() != event.key){
+			$( "#inputBox2" ).val(event.key);
+			keysaveLeft = event.which;
+		}
+	  })
+}
+
+function checkKeyDown2(){
+	$( "#inputBox3" ).on( "keydown", function(event) {
+		if($("#inputBox2").val() != event.key && $("#inputBox1").val() != event.key && $("#inputBox4").val() != event.key){
+			$( "#inputBox3" ).val(event.key);
+			keysaveUp = event.which;
+		}
+	  })
+}
+
+function checkKeyDown3(){
+	$( "#inputBox4" ).on( "keydown", function(event) {
+		if($("#inputBox2").val() != event.key && $("#inputBox1").val() != event.key && $("#inputBox3").val() != event.key){
+			$( "#inputBox4" ).val(event.key);
+			keysaveDown = event.which;
+		}
+	  })
+}
+
+function randon(){
+	$("#randomButton").click(function(){
+		$("#inputBox1").val("ArrowRight")
+		keysaveRight = 39;
+		$("#inputBox2").val("ArrowLeft")
+		keysaveLeft = 37;
+		$("#inputBox3").val("ArrowUp")
+		keysaveUp = 38;
+		$("#inputBox4").val("ArrowDown")
+		keysaveDown = 40;
+		$("#inputBox5").val(randomNumberFromRange(50,90));
+		$("#inputBox6").val('#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+		$("#inputBox7").val('#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+		$("#inputBox8").val('#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+		$("#inputBox9").val(randomNumberFromRange(60,300))
+		$("#inputBox10").val(randomNumberFromRange(1,4));
+	})
+}
+
+function randomNumberFromRange(min,max)
+{
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+
+
+function checkBallBox(){
+	
+}
 /* The function Set and menegment the initialize of the Setting of the User*/
 function Guest_Enter_Website(){
 	Log_In_User="";
@@ -143,6 +230,55 @@ function User_Log_In_Website(){
 	});
 
 }
+function ShowGame(){
+	//Step 1 Initalizing the User Status that its in the top right side of the screen:
+	$("#Guest_Icon").hide();
+	$("#User_Icon").show();
+	$("#User_Status").text("Hello "+Log_In_User+"! ");
+	//At First we Hide all the Windows-Except the Home Window:
+		//Always hide to User:
+		$("#Sign_Up_Window").hide();
+		$("#Log_In_Window").hide();
+		$("#Home_Window").hide();
+		$("#Game_Settings_Window").hide();
+		$("#Error_Window").hide();
+		//Show:
+		$("#Game_Window").show();
+
+		$("#Sign_Up_Menu").click(function() {
+			//Hide:
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Window").hide();
+			$("#Game_Settings_Window").hide();
+			//Show:
+			$("#Error_Window").show();
+	
+		});
+		$("#Log_In_Menu").click(function() {
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Window").hide();
+			$("#Game_Settings_Window").hide();
+			//Show:
+			$("#Error_Window").show();
+		});
+		$("#Home_Menu").click(function() {
+			//Hide:
+			$("#Sign_Up_Window").hide();
+			$("#Log_In_Window").hide();
+			$("#Home_Window").hide();
+			$("#Game_Settings_Window").hide();
+			$("#Error_Window").hide();
+			//Show:
+			$("#Game_Window").show();
+		});
+		$("#Home_Button_SignUp").click(function() {
+			window.alert("DDDDD");
+	});
+}
 function myFunction(){
 	window.alert("DDDDD");
 		
@@ -150,6 +286,123 @@ function myFunction(){
 
 function Log_In_Button_Clicked(){
 	
+}
+
+function Generate_Validation_Game_Settings(){
+	$("form[name='Game_settings']").validate({
+		// Specify validation rules
+		rules: {
+			Right_Box:{
+			required: true
+			},
+			Left_Box:{
+			required: true
+			},
+			Up_Box:{
+			required: true
+			},
+			Down_Box:{
+			required: true
+			},
+			BallNum_Box:{
+				required: true,
+				digits:true,
+				min: 50,
+				max: 90
+			},
+			HighValBall_Box: {
+			  required: true,
+			  ValidColor:true
+			},
+			MidValBall_Box: {
+				required: true,
+				ValidColor:true
+			},
+			SmallValBall_Box: {
+				required: true,
+				ValidColor:true
+			},
+			GameTime_Box: {
+				required: true,
+				digits: true,
+				min:60
+			},
+			MonsterCount_Box: {
+				required: true,
+				digits: true,
+				min:1,
+				max:4
+			},
+			},
+			messages: { 
+				Right_Box: {
+					required: "Please fill out this field.",
+				},
+				Left_Box: {
+					required: "Please fill out this field.",
+				},
+				Up_Box: {
+					required: "Please fill out this field.",
+				},
+				Down_Box: {
+					required: "Please fill out this field.",
+				},
+				BallNum_Box: {
+					required: "Please fill out this field.",
+					digits:"Please fill out only numbers.",
+					min:"The min number of balls u can have is 50",
+					max:"The max number of balls u can have is 90"
+				},
+				HighValBall_Box: {
+					required: "Please fill out this field.",
+					ValidColor:"Please only enter hexadecimal code for color, [starts with #]"
+				},
+				MidValBall_Box: {
+					required: "Please fill out this field.",
+					ValidColor:"Please only enter hexadecimal code for color, [starts with #]"
+				},
+				SmallValBall_Box: {
+					required: "Please fill out this field.",
+					ValidColor:"Please only enter hexadecimal code for color, [starts with #]"
+				},
+				GameTime_Box: {
+					required: "Please fill out this field.",
+					digits: "Please fill out only numbers.",
+					min: "The minimum game time possible is 60 secs"
+				},
+				MonsterCount_Box: {
+					required: "Please fill out this field.",
+					digits: "Please fill out only numbers.",
+					min: "The minimum amount of monsters you can have is is 1",
+					max: "The maximum amount of monsters you can have is is 4"
+				},
+			},
+			  // Make sure the form is submitted to the destination defined
+	  // in the "action" attribute of the form when valid
+	  submitHandler: function(form) {
+		keys["Up"]= keysaveUp
+		keys["Down"] = keysaveDown
+		keys["Right"] = keysaveRight
+		keys["Left"] = keysaveLeft
+		$("#RightKeyLabel").val($( "#inputBox1" ).val())
+		$("#LeftKeyLabel").val($( "#inputBox2" ).val())
+		$("#UpKeyLabel").val($( "#inputBox3" ).val())
+		$("#DownKeyLabel").val($( "#inputBox4" ).val())
+		$("#NumberBalls").val($("#inputBox5").val())
+		$("#HighValBallLabel").val($( "#inputBox6" ).val())
+		$("#MidValBallLabel").val($( "#inputBox7" ).val())
+		$("#SmallValBallLabel").val($( "#inputBox8" ).val())
+		$("#GameTimeLabel").val($( "#inputBox9" ).val())
+		$("#MonsterCountLabel").val($( "#inputBox10" ).val())
+		numberofballs = $("#inputBox5").val();
+		highvalballcolor = $("#inputBox6").val();
+		midvalballcolor = $("#inputBox7").val();
+		smallvalballcolor = $("#inputBox8").val();
+		gametime = $("#inputBox9").val();
+		numofmonsters = $("#inputBox10").val();
+		ShowGame();	
+	  }
+	});
 }
 
 
@@ -175,11 +428,11 @@ function Generate_Valitation_Sign_Up(){
 				required: true,
 				email: true
 			  },
-			  birthday:{
-				required: true
-				}
-			  },
-			  messages: {
+			birthday:{
+			required: true
+			}
+			},
+			messages: {
 				  Full_Name: {
 					  required: "Please fill out this field.",
 					  lettersonly: "Please enter only letters."
