@@ -608,6 +608,7 @@ function Generate_Valitation_Log_In(){
 
 function createImage(src){
 	const image = new Image();
+	image.onload = function(){}
 	image.src = src;
 	return image;
 }
