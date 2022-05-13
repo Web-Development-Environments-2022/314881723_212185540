@@ -106,11 +106,15 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   margin-left: -100px;
   display: inline-block;
  }
- #xd{
+ #gamesettingsingame{
    display: inline-block;
    text-align: left;
    float: left;
  }
  .game{
    display: inline-block;
+ }
+
+ #canvas{
+   background: black;
  }
