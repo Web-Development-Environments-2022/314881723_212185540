@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<!--Header -->
-		<TITLE>Omer mordechai and Lidor tzur Pac Man Game</TITLE><meta charset="UTF-8">
+		<TITLE>Omer Mordechai and Lidor Zur Pac Man Game</TITLE><meta charset="UTF-8">
 		<!-- JS -->
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
@@ -20,17 +20,45 @@
 		<script src="https://kit.fontawesome.com/ebd651dd1f.js" crossorigin="anonymous"></script>
 		</head>
 	<body  >
-		<div id="dialog" title="Basic dialog" style="height: 400px; width: 480px;" >
-			<p>This is sdsd default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+		<div id="dialog" title="About dialog" style="height: 500px; width: 780px;" >
+			<p>Omer Mordechai-314881723</p>
+			<p>Lidor Zur-212185540</p>
+			<hr style="border: 5px solid black;border-radius: 5px;">
+			<p><b>Tamplate Use: </b>We use Tamplate from W3schools</p>
+			<hr style="border: 5px solid black;border-radius: 5px;">
+			<p><b>Jquery plagin: </b>We Use the jQuery Validation Plugin to drop-in validation for the existing forms, while making all kinds of customizations to fit our application really easy.</p>
+			<hr style="border: 5px solid black;border-radius: 5px;">
+			<p><b>Difficulties:</b></p>
+			<p>1.We had a hard time adding the normal validation tests that were not found in the  jquery library and finally solving the problem by using regular expressions.</p>
+			<p>2.It was Difficult to us to draw the Walls in the maze and eventually  we used photos. </p>
 		  </div>
-		  <div id="Sucssesful_Register" title="Basic dialog" style="height: 400px; width: 480px; " >
-			<p>Your succsesfuly Register</p>
+		  <div id="Sucssesful_Register" title="Sucssesful_Register" style="height: 400px; width: 480px; " >
+			<p>You have successfully Register to the system and automatically logged in!</p>
+			<br/>
+			<br/>
+			<center><img  src="Images\Pac_Man_Successful.png"></center>
 		  </div>
-		  <div id="Sucssesful_Log_In" title="Basic dialog" style="height: 400px; width: 480px; " >
-			<p>Your succsesfuly Log_In</p>
+		  <div id="Sucssesful_Log_In" title="Sucssesful_Log_In" style="height: 400px; width: 480px; " >
+			<p>You have successfully logged in to the system!</p>
+			<br/>
+			<br/>
+			<center><img  src="Images\Pac_Man_Successful.png"></center>
 		  </div>
 		  <div id="Incorrect_Password" title="Basic dialog" style="height: 400px; width: 480px; " >
 			<p>Your Password is incorrect,plese try again!</p>
+		  </div>
+		  <div id="win" title="Win" style="height: 400px; width: 480px; " >
+			<p>You have win the Game</p>
+			<p id="win_status"></p>
+			<br/>
+			<br/>
+			<center><img  src="Images\win.png"></center>
+		  </div>
+		  <div id="Game_Over" title="Game_Over" style="height: 400px; width: 480px; " >
+			<p>Game Over</p>
+			<br/>
+			<br/>
+			<center><img  src="Images\Game Over.png"></center>
 		  </div>
 	<!-- The Top Menu -->
 	<div class="w3-top">
@@ -46,23 +74,31 @@
 		<!-- 0.Home: -->
 		
 		<section Class="window" id="Home_Window" style="margin-top: -160px;"  >
-			<!-- ADD THIS ---------------------------------------------------------------------------------- -->
-		<!-- <audio id="myAudio" autoplay loop>
-			<source src="/Images/pacman2.mp3">
-		</audio> -->
 		<div class="image-layer" style="background-image:url(Images/B_1.jpg)">
-				<h1 id="Home_window_header">Game On Pac Man!</h1>
-				<!-- <button id="Home_Button_SignUp"   style=" font-size:24px; margin-top: 160px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white " ><i class="fa fa-user" style="font-size:24px"></i>  Sign Up</button> -->
 				<br/>
-				<!-- <button onclick="Log_In_Button_Clicked()" style=" font-size:24px; margin-top: 20px; margin-right: -150px; color: #f3eaea;background-color: black;border:1px  solid white "  ><i class="fa fa-sign-in" style="font-size:24px"></i> Log In&nbsp</button> -->
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<h1 id="Home_window_header">Game On Pac Man!</h1>
+				<br/>
+				<br/>
+				<br/>
+				<div id="Warp_Home_Btn">
+				<button class="Home_Btn" onclick="Home_Sign_Up_Button_Clicked()"><i class="fa fa-user" style="font-size:24px"></i>  Sign Up</button>
+				<br/>
+				<button class="Home_Btn" onclick="Home_Log_In_Button_Clicked()"  style="  margin-top: 20px; margin-right: -150px;"  ><i class="fa fa-sign-in" style="font-size:24px"></i> Log In&nbsp</button>
+			</div>
 		</div>
 		</section>
 		<!--1.Sign Up-->
 		<section Class="window" id="Sign_Up_Window">
-			<form class='Form_Tamplate' name="Sign_Up" style=" margin-bottom: 30px;" >
+			<img src="Images\Sign_Up.jpg" id="Sign_Up_Move" style="height: 270px;width: 230px; float:left;margin-top: 115px; margin-left: 100px;">
+			<form class='Form_Tamplate' autocomplete='off' name="Sign_Up" style="margin-top: 20px; " >
 				<h1 style="margin-top: -50px; margin-bottom: 30px;">Sign Up</h1>
 				<div class='Warp_Form_Box'>
-				  <input type='text' name='Full_Name' id="Full_Name" placeholder='Enter Your Full Name'  style="height:  30px;" >
+				  <input type='text' name='Full_Name' id="Full_Name" placeholder='Enter Your Full Name'  style="height:  30px; " >
 				</div>
 				<div class='Warp_Form_Box'>
 					<input type='text' id="Sign_Up_UserName" name='User_Name' placeholder='Enter Your User Name' style="height:  30px;" >
@@ -87,9 +123,10 @@
 		</section>
 		<!--2.Log IN-->
 		<section Class="window" id="Log_In_Window"  >
-			<form autocomplete='off' name="Log_In" class='Form_Tamplate'style=" margin-bottom: 60px;">
+			<form autocomplete='off' name="Log_In" class='Form_Tamplate'style=" margin-bottom: 90px;">
 				<h1>Log In</h1>
-				<canvas style="border:1px solid #f3eaea; height: 30px;width: 270px; "></canvas>
+				<br/>
+				<!--<canvas style="border:1px solid #f3eaea; height: 30px;width: 270px; "></canvas>-->
 				<div class='Warp_Form_Box'>
 				  <input name='User_Name' id="L_I_User_Name" placeholder='User Name' type='text'>
 				</div>
@@ -107,48 +144,39 @@
 		</section>
 		<!--3.Game_Settings-->
 		<section Class="window" id="Game_Settings_Window" >
-		<h1>Game Setting</h1>
-		<form class='game_settings_form' name="Game_settings" style=" margin-bottom: 30px;" >
+			<h1>Game Setting</h1>
+		<form class='game_settings_form' name="Game_settings" style=" margin-bottom: 120px;" >
 			<div id='game_settings_box'>
-			Choose a key to move right: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="inputBox1" name="Right_Box" placeholder="[Press any key]" readonly>
+			<p>Choose a key to move right:</p> <input type="text" id="inputBox1" name="Right_Box" placeholder="[Press any key]" readonly style="margin-left: 260px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose a key to move left: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="inputBox2" name="Left_Box" placeholder="[Press any key]" readonly>
+			<p>Choose a key to move left:</p>  <input type="text" id="inputBox2" name="Left_Box" placeholder="[Press any key]" readonly style="margin-left: 270px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose a key to move up: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="inputBox3" name="Up_Box" placeholder="[Press any key]" readonly>
+				<p>Choose a key to move up:</p>  <input type="text" id="inputBox3" name="Up_Box" placeholder="[Press any key]" readonly style="margin-left: 288px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose a key to move down: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" id="inputBox4" name="Down_Box" placeholder="[Press any key]" readonly>
+				<p>Choose a key to move down:</p>  <input type="text" id="inputBox4" name="Down_Box" placeholder="[Press any key]" readonly style="margin-left: 270px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose number of balls to the game (min:50 and max:90): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" id="inputBox5" name="BallNum_Box" placeholder="[num of balls]">
+				<p>Choose number of balls to the game (min:50 and max:90):</p>  <input type="number" id="inputBox5" name="BallNum_Box" placeholder="[num of balls]" style="margin-left: 10px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose color for the high value ball (25 points): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="color" id="inputBox6" name="HighValBall_Box" placeholder="[#00000]">
+				<p>Choose color for the high value ball (25 points):</p>  <input type="color" id="inputBox6" name="HighValBall_Box" placeholder="[#00000]" style="margin-left: 62px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose color for the medium value ball (15 points): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="color" id="inputBox7" name="MidValBall_Box" placeholder="[#00000]">
+				<p>Choose color for the medium value ball (15 points):</p>  <input type="color" id="inputBox7" name="MidValBall_Box" placeholder="[#00000]" style="margin-left: 42px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose color for the small value ball (5 points): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="color" id="inputBox8" name="SmallValBall_Box" placeholder="[#00000]">
+				<p>Choose color for the small value ball (5 points):</p> <input type="color" id="inputBox8" name="SmallValBall_Box" placeholder="[#00000]"style="margin-left: 60px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose time for the game (min: 60 sec): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" id="inputBox9" name="GameTime_Box" placeholder="[60]">
+				<p>Choose time for the game (min: 60 sec):</p> <input type="number" id="inputBox9" name="GameTime_Box" placeholder="[60]"style="margin-left: 150px;">
 			</div>
-			<br>
 			<div id='game_settings_box'>
-			Choose number of monsters for the game (min: 1 , max:4): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" name="MonsterCount_Box" id="inputBox10" placeholder="[1]">
+				<p>Choose number of monsters for the game (min: 1 , max:4):</p> <input type="number" name="MonsterCount_Box" id="inputBox10" placeholder="[1]"style="margin-left: 0px;">
 			</div>
-			<br>
+			<br/>
 			<button class='Warp_Btn_Box' type='submit' name="Sumbit_Settings">
 			<div class='text'>Confirm Settings</div>
 			<button class='Warp_Btn_Box' type='reset' name="Reset" style="margin-left: 140px; margin-top:-56px" >
@@ -160,9 +188,10 @@
 		</form>
 		</section>
 		<!--4.Game-->
-		<section Class="window" id="Game_Window" >
-			<div id="gamesettingsingame">
-				<div id="UpKey" class="gamesettings">
+		<section Class="window" id="Game_Window" style="  zoom: 70%; " >
+			<div id="gamesettingsingame" style="  margin-left: -900px; margin-top: 70px; ">
+				<h1>Game Settings:</h1>
+				<div id="UpKey" class="gamesettings" >
 					<label> Up Key: </label>
 					<input id="UpKeyLabel" type="text" readonly/>
 				</div>
@@ -209,7 +238,8 @@
 				</div>
 			</div>
 			<div id="game" class="game">
-				<br>
+				<div style="margin-top:-400px; margin-right: -1400px;">
+					<h1>Game Status:</h1>
 				<div id="score" class="gamesettings">
 					<label for="lblScore">SCORE:</label>
 					<input id="lblScore" type="text" />
@@ -222,7 +252,9 @@
 					<label for="lblLives">Lives:</label>
 					<input id="lblLives" type="text" />
 				</div>
-			<canvas id="canvas" height="600" width="600" ></canvas>
+			</div>
+	
+			<canvas id="canvas" height="600" width="600" style="margin-top:-108px ;margin-right:-200px; margin-bottom: 120px;" ></canvas>
 			</div>
 			</section>
 		<!--5. Error-->
@@ -240,9 +272,9 @@
 <div style=" position: relative; height: 700px;" >
 <footer class=" w3-padding-3  w3-black w3-center w3-bottom" >
 	<span>Find Us On Facebook:</span>
-	<a href="#" style="text-decoration:none">Omer Mordechai&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
+	<a href="https://www.facebook.com/omer.mordchi" style="text-decoration:none">Omer Mordechai&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
 	<span>&nbsp; </span>
-	<a href="#" style="text-decoration:none"> &nbsp;Lidor Zur&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
+	<a href="https://www.facebook.com/lidor.zur" style="text-decoration:none"> &nbsp;Lidor Zur&nbsp;</a><i class="fa fa-facebook-official w3-hover-opacity"></i>
   </footer>
 </div>
 

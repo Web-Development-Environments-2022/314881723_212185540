@@ -1,3 +1,4 @@
+
 /*User var Initiallaizing*/
 var All_Users={};
 All_Users["k"]="k";
@@ -118,6 +119,8 @@ $(document).ready(function() {
 	$("#Sucssesful_Register").hide();
 	$("#Sucssesful_Log_In").hide();
 	$("#Incorrect_Password").hide();
+	$("#win").hide();
+	$("#Game_Over").hide();
 	$("#About_Menu").click(function() {
 	$("#dialog").modal({
 		fadeDuration: 1000,
@@ -323,9 +326,7 @@ function User_Log_In_Website(){
 			//Show:
 			$("#Game_Settings_Window").show();
 		});
-		$("#Home_Button_SignUp").click(function() {
-			window.alert("DDDDD");
-	});
+
 
 }
 function ShowGame(){
@@ -373,18 +374,10 @@ function ShowGame(){
 			//Show:
 			$("#Game_Window").show();
 		});
-		$("#Home_Button_SignUp").click(function() {
-			window.alert("DDDDD");
-	});
-}
-function myFunction(){
-	window.alert("DDDDD");
-		
+
 }
 
-function Log_In_Button_Clicked(){
-	
-}
+
 
 function Generate_Validation_Game_Settings(){
 	$("form[name='Game_settings']").validate({
@@ -611,7 +604,7 @@ function Generate_Valitation_Log_In(){
 			Log_In_User=Log_In_User_Name;
 			$("#Sucssesful_Log_In").modal({
 				fadeDuration: 1000,
-				fadeDelay: 0.50
+				fadeDelay: 0.30
 			  })
 			User_Log_In_Website();	
 		}
@@ -1251,16 +1244,29 @@ function UpdatePosition() {
 	}
 	if(foodLeft == 0){
 		window.clearInterval(interval);
-		window.alert("Winner! - You collected all of the available food!");
+		$("#win_status").text="Winner! - You collected all of the available food!";
+		  $("#win").modal({
+			fadeDuration: 1000,
+			fadeDelay: 0.50
+		  });
+		  $("#win_status").text="";
 	}
 	if (time_left == 0) {
 		if(score < 100){
 			window.clearInterval(interval);
-			window.alert("You are better than " + score + " points!");
+			$("#win_status").text="You are better than " + score + " points!";
+			  $("#win").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  });
+			  $("#win_status").text="";
 		}
 		else{
 			window.clearInterval(interval);
-			window.alert("Winner!!!");
+			  $("#win").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  });
 		}
 	}
 	else {
@@ -1498,7 +1504,10 @@ function moveGhost1(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
-			window.alert("Loser!");
+			$("#Game_Over").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  })
 		}
 		if(score-10 < 0){
 			score = 0;
@@ -1738,7 +1747,10 @@ function moveGhost2(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
-			window.alert("Loser!");
+			$("#Game_Over").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  });
 		}
 		if(score-10 < 0){
 			score = 0;
@@ -1976,7 +1988,10 @@ function moveGhost3(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
-			window.alert("Loser!");
+			$("#Game_Over").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  });
 		}
 		if(score-10 < 0){
 			score = 0;
@@ -2214,7 +2229,10 @@ function moveGhost4(){
 		lives-=2;
 		if(lives <= 0){
 			window.clearInterval(interval);
-			window.alert("Loser!");
+			$("#Game_Over").modal({
+				fadeDuration: 1000,
+				fadeDelay: 0.50
+			  });
 		}
 		if(score-20 < 0){
 			score = 0;
@@ -2294,3 +2312,33 @@ function highvalmonstermove(){
 	}
 }
 
+function Home_Sign_Up_Button_Clicked(){
+	$("#Log_In_Window").hide();
+	$("#Home_Window").hide();
+	$("#Game_Window").hide();
+	$("#Game_Settings_Window").hide();
+	$("#Error_Window").hide();
+	//Show:
+	$("#Sign_Up_Window").show();
+
+}
+function Home_Log_In_Button_Clicked(){
+	$("#Log_In_Window").hide();
+	$("#Home_Window").hide();
+	$("#Game_Window").hide();
+	$("#Game_Settings_Window").hide();
+	$("#Error_Window").hide();
+	$("#Sign_Up_Window").hide();
+	//Show:
+	$("#Log_In_Window").show();
+
+}
+
+$("#Game_Over").modal({
+	fadeDuration: 1000,
+	fadeDelay: 0.50
+  })
+  $("#win").modal({
+	fadeDuration: 1000,
+	fadeDelay: 0.50
+  })
