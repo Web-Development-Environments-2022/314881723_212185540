@@ -891,9 +891,6 @@ function Start() {
 			var randomNum = Math.random();
 			if(board[i][j] < 4){
 				if (randomNum <= (1.0 * food_remain) / cnt) {
-					console.log(i);
-					console.log(j);
-					console.log("lol")
 					food_remain--;
 					if(randomNum <= 0.18){
 						board[i][j] = 1;
@@ -1244,25 +1241,24 @@ function UpdatePosition() {
 	}
 	if(foodLeft == 0){
 		window.clearInterval(interval);
-		$("#win_status").text="Winner! - You collected all of the available food!";
+		document.getElementById("win_status").innerHTML = "Winner! - You collected all of the available food!"
 		  $("#win").modal({
 			fadeDuration: 1000,
 			fadeDelay: 0.50
 		  });
-		  $("#win_status").text="";
 	}
 	if (time_left == 0) {
 		if(score < 100){
 			window.clearInterval(interval);
-			$("#win_status").text="You are better than " + score + " points!";
-			  $("#win").modal({
+			document.getElementById("lose_status").innerHTML = "You are better than " + score + " points!";
+			  $("#Game_Over").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
 			  });
-			  $("#win_status").text="";
 		}
 		else{
 			window.clearInterval(interval);
+			document.getElementById("win_status").innerHTML = "Winner!!!"
 			  $("#win").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
@@ -1504,10 +1500,11 @@ function moveGhost1(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
+			document.getElementById("lose_status").innerHTML = "Loser!";
 			$("#Game_Over").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
-			  })
+			  }) 
 		}
 		if(score-10 < 0){
 			score = 0;
@@ -1747,6 +1744,7 @@ function moveGhost2(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
+			document.getElementById("lose_status").innerHTML = "Loser!";
 			$("#Game_Over").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
@@ -1988,6 +1986,7 @@ function moveGhost3(){
 		lives-=1;
 		if(lives == 0){
 			window.clearInterval(interval);
+			document.getElementById("lose_status").innerHTML = "Loser!";
 			$("#Game_Over").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
@@ -2229,6 +2228,7 @@ function moveGhost4(){
 		lives-=2;
 		if(lives <= 0){
 			window.clearInterval(interval);
+			document.getElementById("lose_status").innerHTML = "Loser!";
 			$("#Game_Over").modal({
 				fadeDuration: 1000,
 				fadeDelay: 0.50
@@ -2334,11 +2334,11 @@ function Home_Log_In_Button_Clicked(){
 
 }
 
-$("#Game_Over").modal({
-	fadeDuration: 1000,
-	fadeDelay: 0.50
-  })
-  $("#win").modal({
-	fadeDuration: 1000,
-	fadeDelay: 0.50
-  })
+// $("#Game_Over").modal({
+// 	fadeDuration: 1000,
+// 	fadeDelay: 0.50
+//   })
+//   $("#win").modal({
+// 	fadeDuration: 1000,
+// 	fadeDelay: 0.50
+//   })
