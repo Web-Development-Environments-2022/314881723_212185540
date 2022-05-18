@@ -75,11 +75,12 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 
 /* new*/
 .image-layer{
-	position:fixed;
+	/* position:fixed; */
 	left:0;
 	top:0;
+  margin-top: 100px;
   margin-bottom: 100px;
-  height: 100%;
+  height: 1000px;
   width: 100%;
 	background-repeat: repeat-x;
 	background-position: center;

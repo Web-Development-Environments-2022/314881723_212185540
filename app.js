@@ -127,8 +127,8 @@ $(document).ready(function() {
 		fadeDelay: 0.50
 	  })
 	});
-	// var audio = document.getElementById("myAudio");
-	// audio.volume = 0.1;
+	var audio = document.getElementById("myAudio");
+	audio.volume = 0.1;
 	/*Generate the windos Methods:*/
 	Guest_Enter_Website();
 
